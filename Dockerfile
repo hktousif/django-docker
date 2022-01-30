@@ -2,6 +2,7 @@ FROM python:3.9
 ENV PYTHONUNBUFFERED 1
 COPY ./requirements.txt /requirements.txt
 COPY ./app /app
+COPY ./scripts /scripts
 WORKDIR /app
 EXPOSE 8000
 RUN python -m venv /django_env && \
@@ -15,7 +16,9 @@ RUN python -m venv /django_env && \
     mkdir -p /vol/web/static && \
     mkdir -p /vol/web/media &&\
     chown -R django_user:app /vol && \
-    chown -R 755 /vol
+    chown -R 755 /vol && \
+    chmod -R +x /scripts
 
-ENV PATH="/django_env/bin/:$PATH"
+ENV PATH="/scripts:/django_env/bin:$PATH"
 USER django_user
+CMD ["run.sh"]
