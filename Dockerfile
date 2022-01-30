@@ -20,5 +20,7 @@ RUN python -m venv /django_env && \
     chmod -R +x /scripts
 
 ENV PATH="/scripts:/django_env/bin:$PATH"
+
 USER app
+
 CMD ["run.sh"]
