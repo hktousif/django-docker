@@ -17,10 +17,11 @@ RUN python -m venv /django_env && \
     mkdir -p /vol/web/media && \
     chown -R app:app /vol && \
     chown -R 755 /vol && \
-    chmod -R +x /scripts
+    chmod -R +x /scripts && \
+    chmod -R +x manage.py
 
 ENV PATH="/scripts:/django_env/bin:$PATH"
 
-USER app
+# USER app
 
 CMD ["run.sh"]
