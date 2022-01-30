@@ -11,6 +11,11 @@ RUN python -m venv /django_env && \
     #     build-base postgresql-dev musl-dev && \
     /django_env/bin/pip install -r /requirements.txt && \
     # apk del .tmp-deps && \
-    adduser --disabled-password --no-create-home django_user
+    adduser --disabled-password --no-create-home django_user \
+    mkdir -p /vol/web/static && \
+    mkdir -p /vol/web/media &&\
+    chown -R django_user:app /vol && \
+    chown -R 755 /vol
+
 ENV PATH="/django_env/bin/:$PATH"
 USER django_user
